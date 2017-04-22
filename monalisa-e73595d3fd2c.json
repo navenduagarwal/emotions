@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "monalisa-e921b",
+  "private_key_id": "e73595d3fd2c87df05c74d6fe10c9e5b8b2d194d",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDdCvUILQNUA2yX\nKqIDniAP7fAH2U41x0ekO74oisKydVfhk6w73BBxc00KDq1BEFL0lMOs8uzeg8Fj\nB5WgiORLRZjlAA/ugtYa2EruHf3nafrRX6kI74FJelV7wQrc0EmXD8+r38Aw4DI4\nUSnlkwsFpxlLP5i0qmKISKLVnJf0i58wY8ZN9qazczhU6sfWDbW7e4jaNCIw2C0m\nG3ww5cf6dMRKl2ygqly3uXY3s4SaYKdqUFRssGW+qfGsVd/1aILhCZY1HdwI0qjC\ntyQXzf0vgpMMWugklsvT/cGITYhn2p4i3TiuCuK64M6ZwUbAOzcCGIlS5ReEIRnI\n46+vPq1fAgMBAAECggEBANi6n5pOmE7NtLFbSdOGPSWhRJJNjRPJuwLa2Q5jT5cu\n2uYApwViNnUmekj8Lv/2g3/wRRPUdE+QnBL/IsRutHjhWpJeR0Cy5D8aCA4FNiiq\njxSvWMu8GeXzntFia8YqK52EETkSgBzsFhGF8zB3xnzaZECVsKKj1UyO+6m6into\ngEZ/a+MLJLYAItU3sJBMOZRxpnLLRd3b+gAynRzs9cIpddiU+ULc2wZYnI+XVcyd\nHkGT/SPd2HpXTz+S+Zyx9CekE9MRYHVlp3T6RNjMHcB/pTUFzBxu53HCjtqtEPa/\ntMV7VNsSSZOyHkrUCaInS+yRdTFG+tqMXfzXfjFxqQECgYEA7uy7n2dYn6AGXij9\nxq4URZfUMc/33GSMFClV+9r1RfWVG0DBE+iwUzZZx5YAThhS7MjoHY28QY042pWC\ngPCYWnmwcryFQKvv9Zhhwp7tYbvBMcUbanJoP/pZu+a1E91MLJqtn7gWdBtq2bL0\nNbtv5Gvec1XcM1G+nIjRAmWC8cECgYEA7NcQVqJyrvBIkjdbjT9ZVwWYC8wqsWA2\nrjWKSWo5tMEHwTBb1UPmcc7e7PKXIvR+HMzKjRFpC3O+SuiijiJaDfW9wlJ3DE3v\n9oX3GPfbjaxaiCKPVSWFUzAbrmDG8wIWfzdPwSg4OGK3AaeE0eNx6CDm/2+3OmMi\no/goLZdPJx8CgYBe5lrzysnRxW8iEWgTdWuJ5O+cxX0u5iUZkP2dJvBLVGtgQs0u\nCjuXIbxxYSxH2LN/Z6GCs5x18REHCWGns2jgbvtd53GKKYELbPZPpm6lZj0rdp4Y\nHs83sknYL5/2/uxVvy59hVIt1gIP7FvBx+x+rzXRW+Y14B8078cNC6MCQQKBgDzL\nrBcBFj1P0uEtsqOcaluLRQ9qNl9X2lF3zuqviOacUlhGCJzDFEmMl+7tCtzfM+xC\nqY/ysytMZ8Gk2+1uZf2FYlOahZK0AvAeTWKsZUCFyKt/a5moywOiqshlcUx58bpw\nQVnM8DmRJXcYQGD8aIX0xDc3vyoOvpqmnfGuEJRzAoGAfFOalk//No3sROHBUayJ\n0D8lSIoFpF5eAiKIkDU8ukxNDMw78DfM2VkYCOH3ZY7YTIfZa5j6ybGIGvqouH2r\n2un0qjiV8m7fseCUFORfgTlp8QScIhxGzDGN987x3//Gk3v5FEkNR2U4XAvuaZml\nBM9Xgsaili+wqoCUSJTh75A=\n-----END PRIVATE KEY-----\n",
+  "client_email": "webcam@monalisa-e921b.iam.gserviceaccount.com",
+  "client_id": "106245473398728378802",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/webcam%40monalisa-e921b.iam.gserviceaccount.com"
+}
