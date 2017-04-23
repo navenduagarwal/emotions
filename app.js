@@ -4,7 +4,7 @@ console.log("Application starting to listen for images to find faces....");
 
 var express = require('express');
 var cors = require('cors');
-var serviceAccount = require('./monalisa-e921b-firebase-adminsdk-0kgif-830b01817b.json');
+var serviceAccount = require('./firebase-privatekey.json');
 var fs = require('fs');
 var firebase = require('firebase-admin');
 firebase.initializeApp({
@@ -19,7 +19,7 @@ var emotionsRef = ref.child('navendu');
 
 var gcloud = require('google-cloud')({
 	projectId: 'monalisa-e921b',
-	keyFilename: 'monalisa-e73595d3fd2c.json'
+	keyFilename: 'firebase-privatekey.json'
 });
 
 //https://googlecloudplatform.github.io/gcloud-node/#/docs/vision
