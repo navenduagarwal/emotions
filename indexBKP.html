@@ -1,12 +1,13 @@
 
 <!doctype html>
 <html>
-	<head>
-		<script src="https://cdn.mlkcca.com/v0.6.0/milkcocoa.js"></script>
-		<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
-		<script src="/static/javascripts/desktop-notify-min.js"></script>
-		<link rel="manifest" href="/static/manifest.json">
-		<style>
+<head>
+	<script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script>
+	<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+	<script src="static/js/desktop-notify-min.js"></script>
+	<script src="./config.js"></script>
+	<link rel="manifest" href="/static/manifest.json">
+	<style>
 		body {
 			padding: 50px;
 			font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
@@ -29,27 +30,30 @@
 			margin-top: 4em;
 			margin-bottom: 4em;
 		}
-		</style>
+	</style>
 
-		<title>Soulgem Monitor</title>
-	</head>
+	<title>Soulgem Monitor</title>
+</head>
 
-	<body>
-		<div id="wrapper"> 
-			<button class="js-button">ボタン</button>
-			<button id="capture">START</button>
-			<button id="stop">STOP</button>
-		</div>
-		<div class="gem-wrapper">
-			<img src="images/gem.png" width="150" height="auto" class="gem"/>
-			<video autoplay width="640" height="480" id="video"></video>
-		</div>
-		<canvas style="display:none;" width="640" height="480" id="snap"></canvas>
-		<svg id="svgchart"></svg>
-	 
-		<script type="text/javascript">
-			var milkcocoa = new MilkCocoa('MILKCOCOA_ID');
-			var ds = milkcocoa.dataStore("DATASTORE_ID");
+<body>
+	<div id="wrapper"> 
+		<button class="js-button">ボタン</button>
+		<button id="capture">START</button>
+		<button id="stop">STOP</button>
+	</div>
+	<div class="gem-wrapper">
+		<img src="images/gem.png" width="150" height="auto" class="gem"/>
+		<video autoplay width="640" height="480" id="video"></video>
+	</div>
+	<canvas style="display:none;" width="640" height="480" id="snap"></canvas>
+	<svg id="svgchart"></svg>
+
+	<script type="text/javascript">
+	
+			firebase.initializeApp(config);
+			var ref = firebase.database().ref('faces');
+			var emotionsRef = ref.child('navendu');
+
 			var video = document.getElementById('video');
 			var canvas = document.getElementById('snap');
 			var ctx = canvas.getContext('2d');
@@ -63,7 +67,9 @@
 			var onFailSoHard = function(e) {
 				console.log('エラー!', e);
 			};
- 
+
+			console.log('started navendu');
+
 			var snapshot = function() {
 				if (localMediaStream) {
 					ctx.drawImage(video, 0, 0);
@@ -103,18 +109,23 @@
 				}
 				elem.css(style);
 			}
-			ds.on("push",function(data){
-				if ( data.value.happiness === 0 ) {
-					status = Math.max(status - 10, 0);
+
+			emotionsRef.on("value",function(snapshot){
+				console.log(snapshot.val());
+
+				if (snapshot.val().happiness === 0 ) {
+					status = Math.max(status - 30, 0);  
 				}else{
 					status = Math.min(status + 20, 120)
 				}
+				console.log("status" + status);
 				changeColor(status);
 				pushNotification(status);
 			});
+
 			window.URL = window.URL || window.webkitURL;
 			navigator.getUserMedia  = navigator.getUserMedia || navigator.webkitGetUserMedia ||
-										navigator.mozGetUserMedia || navigator.msGetUserMedia;
+			navigator.mozGetUserMedia || navigator.msGetUserMedia;
 			navigator.getUserMedia({video: true}, function(stream) {
 				video.src = window.URL.createObjectURL(stream);
 				localMediaStream = stream;
@@ -135,22 +146,22 @@
 					autoClose: 4000 
 				});
 				var text, msg, img;
-				if (status == 60) {
-					text = 'ソウルジェムが濁っています';
-					body = '魔女になっちゃうよ';
+				if (status <= 90) {
+					text = 'Dark lord is here';
+					body = 'my my';
 					img  = 'images/dark-gem.png';
 					notification(text, body, img);
 				}
 				if (status == 0) {
-					text = 'ソウルジェムが・・・！！！';
-					body = 'いますぐ笑って';
+					text = 'Who needs testing';
+					body = 'wow';
 					img  = 'images/dark-gem.png';
 					notification(text, body, img);
 				}
 				if (status == 120) {
-					text = '綾乃剛さんからメッセージです。';
-					body = '最高の笑顔だな';
-					img  = 'images/go.jpg';
+					text = 'I am so happy';
+					body = 'wow';
+					img  = 'images/navendu.jpg';
 					notification(text, body, img);
 				}
 			}
@@ -160,7 +171,7 @@
 					icon: img
 				});
 			}
-	 </script>
+		</script>
 
- </body>
-</html>
+	</body>
+	</html>

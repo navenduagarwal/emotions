@@ -56,4 +56,6 @@ typings/
 
 # dotenv environment variables file
 .env
+config.js
+monalisa-e921b-firebase-adminsdk-0kgif-830b01817b.json
 
