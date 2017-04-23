@@ -11,7 +11,7 @@
 		body {
 			padding: 50px;
 			font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-			background-image: url(images/bg.jpg);
+			background-image: url(static/images/bg.jpg);
 			background-size: cover;
 		}
 		a {
@@ -37,12 +37,12 @@
 
 <body>
 	<div id="wrapper"> 
-		<button class="js-button">ボタン</button>
+		<button class="js-button">BUTTON</button>
 		<button id="capture">START</button>
 		<button id="stop">STOP</button>
 	</div>
 	<div class="gem-wrapper">
-		<img src="images/gem.png" width="150" height="auto" class="gem"/>
+		<img src="static/images/gem.png" width="150" height="auto" class="gem"/>
 		<video autoplay width="640" height="480" id="video"></video>
 	</div>
 	<canvas style="display:none;" width="640" height="480" id="snap"></canvas>
@@ -65,7 +65,7 @@
 					navigator.mozGetUserMedia || navigator.msGetUserMedia);
 			}
 			var onFailSoHard = function(e) {
-				console.log('エラー!', e);
+				console.log('error!', e);
 			};
 
 			console.log('started navendu');
@@ -114,7 +114,7 @@
 				console.log(snapshot.val());
 
 				if (snapshot.val().happiness === 0 ) {
-					status = Math.max(status - 30, 0);  
+					status = Math.max(status - 10, 0);  
 				}else{
 					status = Math.min(status + 20, 120)
 				}
@@ -149,19 +149,19 @@
 				if (status <= 90) {
 					text = 'Dark lord is here';
 					body = 'my my';
-					img  = 'images/dark-gem.png';
+					img  = 'static/images/dark-gem.png';
 					notification(text, body, img);
 				}
 				if (status == 0) {
 					text = 'Who needs testing';
 					body = 'it is all zero';
-					img  = 'images/dark-gem.png';
+					img  = 'static/images/dark-gem.png';
 					notification(text, body, img);
 				}
 				if (status == 120) {
 					text = 'I am so happy';
-					body = 'wow';
-					img  = 'images/navendu.jpg';
+					body = 'all positive';
+					img  = 'static/images/navendu.jpg';
 					notification(text, body, img);
 				}
 			}
