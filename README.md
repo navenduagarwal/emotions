@@ -1,4 +1,4 @@
-#Emotions Example using - Firebase and Google Cloud Vision API
+# Emotions Example using - Firebase and Google Cloud Vision API
 
 add config.js file with firebase config details. In following format:
 
