@@ -4,14 +4,14 @@
 <head>
 	<script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script>
 	<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
-	<script src="static/js/desktop-notify-min.js"></script>
-	<script src="./config.js"></script>
+	<script src="/static/js/desktop-notify-min.js"></script>
+	<script src="/static/config.js"></script>
 	<link rel="manifest" href="/static/manifest.json">
 	<style>
 		body {
 			padding: 50px;
 			font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-			background-image: url(static/images/bg.jpg);
+			background-image: url(/static/images/bg.jpg);
 			background-size: cover;
 		}
 		a {
@@ -42,7 +42,7 @@
 		<button id="stop">STOP</button>
 	</div>
 	<div class="gem-wrapper">
-		<img src="static/images/gem.png" width="150" height="auto" class="gem"/>
+		<img src="images/gem.png" width="150" height="auto" class="gem"/>
 		<video autoplay width="640" height="480" id="video"></video>
 	</div>
 	<canvas style="display:none;" width="640" height="480" id="snap"></canvas>
@@ -149,19 +149,19 @@
 				if (status <= 80 && status > 0) {
 					text = 'Dark lord is here';
 					body = 'my my';
-					img  = 'static/images/fear.png';
+					img  = 'images/fear.png';
 					notification(text, body, img);
 				}
 				if (status == 0) {
 					text = 'Who needs testing';
 					body = 'it is all zero';
-					img  = 'static/images/sad.png';
+					img  = 'images/sad.png';
 					notification(text, body, img);
 				}
 				if (status == 120) {
 					text = 'I am so happy';
 					body = 'all positive';
-					img  = 'static/images/joy.png';
+					img  = 'images/joy.png';
 					notification(text, body, img);
 				}
 			}
