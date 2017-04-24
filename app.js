@@ -15,7 +15,6 @@ var ref = firebase.database().ref('faces');
 // var userId = (Math.random() + 1).toString(36).substring(2, 12);
 
 
-var emotionsRef = ref.child('navendu');
 
 var gcloud = require('google-cloud')({
 	projectId: 'monalisa-e921b',
@@ -49,8 +48,16 @@ app.post('/submit', function(req, res){
 						var happy = convertEmotionInfoToNum(apiResponse.responses[0].faceAnnotations[0].joyLikelihood);
 						var sad = convertEmotionInfoToNum(apiResponse.responses[0].faceAnnotations[0].sorrowLikelihood);
 						var angry = convertEmotionInfoToNum(apiResponse.responses[0].faceAnnotations[0].angerLikelihood);
+						var surprise = convertEmotionInfoToNum(apiResponse.responses[0].faceAnnotations[0].surpriseLikelihood);
+						var rollAngle = apiResponse.responses[0].faceAnnotations[0].rollAngle;
+						var panAngle = apiResponse.responses[0].faceAnnotations[0].panAngle;
+						var tiltAngle = apiResponse.responses[0].faceAnnotations[0].tiltAngle;
+						
+						var browserId = req.body.browserId;
+						console.log(browserId);
+						var emotionsRef = ref.child(browserId);
 
-						emotionsRef.set({happiness : happy, sadness: sad, anger: angry},function(data){
+						emotionsRef.set({happiness : happy, sadness: sad, anger: angry, surprise: surprise, rollAngle: rollAngle, panAngle: panAngle, tiltAngle: tiltAngle},function(data){
 							console.log("emotion identified for face 1");
 						});
 					}

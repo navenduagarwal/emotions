@@ -52,7 +52,7 @@
 	
 			firebase.initializeApp(config);
 			var ref = firebase.database().ref('faces');
-			var emotionsRef = ref.child('navendu');
+			
 
 			var video = document.getElementById('video');
 			var canvas = document.getElementById('snap');
@@ -70,7 +70,17 @@
 
 			console.log('started navendu');
 
-			var snapshot = function() {
+			var browserId = localStorage.getItem('browserId');
+			if(!browserId){
+				randText = getRandomText();
+				localStorage.setItem('browserId', randText);
+			}
+			
+// 			alert(localStorage.getItem('browserId'));
+// 			var emotionsRef = ref.child(localStorage.getItem('browserId'));
+			
+			var snapshot = function() {				
+				
 				if (localMediaStream) {
 					ctx.drawImage(video, 0, 0);
 					var dataUri = canvas.toDataURL('image/jpeg');
@@ -78,12 +88,15 @@
 						url: "http://localhost:3000/submit",
 						type: 'POST',
 						data: JSON.stringify({
-							dataUri: dataUri
+							dataUri: dataUri,
+							browserId: browserId
 						}),
 						contentType: 'application/json'
 					})
 				}
 			}
+								
+			
 			var status = 30;
 			var changeColor = function (status) {
 				var elem = $('.gem');
@@ -110,6 +123,9 @@
 				elem.css(style);
 			}
 
+			console.log(browserId);
+			var emotionsRef = ref.child(browserId);
+			console.log(emotionsRef);
 			emotionsRef.on("value",function(snapshot){
 				console.log(snapshot.val());
 
@@ -170,6 +186,19 @@
 					body: body,
 					icon: img
 				});
+			}
+			
+			function getRandomText(){
+// 				var randomText = (Math.random() + 1).toString(36).substring(2, 12);
+// 				return(randomText);
+				
+				 var text = "";
+				    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+				    for( var i=0; i < 25; i++ )
+				        text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+				    return text;
 			}
 		</script>
 
