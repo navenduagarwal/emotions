@@ -114,7 +114,7 @@
 				console.log(snapshot.val());
 
 				if (snapshot.val().happiness === 0 ) {
-					status = Math.max(status - 20, 0);  
+					status = Math.max(status - 40, 0);  
 				}else{
 					status = Math.min(status + 20, 120)
 				}
@@ -146,22 +146,22 @@
 					autoClose: 4000 
 				});
 				var text, msg, img;
-				if (status <= 90) {
+				if (status <= 80 && status > 0) {
 					text = 'Dark lord is here';
 					body = 'my my';
-					img  = 'static/images/dark-gem.png';
+					img  = 'static/images/fear.png';
 					notification(text, body, img);
 				}
 				if (status == 0) {
 					text = 'Who needs testing';
 					body = 'it is all zero';
-					img  = 'static/images/dark-gem.png';
+					img  = 'static/images/sad.png';
 					notification(text, body, img);
 				}
 				if (status == 120) {
 					text = 'I am so happy';
 					body = 'all positive';
-					img  = 'static/images/navendu.jpg';
+					img  = 'static/images/joy.png';
 					notification(text, body, img);
 				}
 			}
