@@ -84,7 +84,7 @@
 					})
 				}
 			}
-			var status = 90;
+			var status = 30;
 			var changeColor = function (status) {
 				var elem = $('.gem');
 				var percent;
@@ -114,7 +114,7 @@
 				console.log(snapshot.val());
 
 				if (snapshot.val().happiness === 0 ) {
-					status = Math.max(status - 10, 0);  
+					status = Math.max(status - 20, 0);  
 				}else{
 					status = Math.min(status + 20, 120)
 				}

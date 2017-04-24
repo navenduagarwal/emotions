@@ -28,7 +28,7 @@ var bodyParser = require('body-parser');
 var app = express();
 
 app.use(cors());
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({ limit:'50mb',extended: true }));
 
 app.use('/static', express.static('public'))
@@ -45,7 +45,7 @@ app.post('/submit', function(req, res){
 				console.log('Found ' + numFaces + (numFaces === 1 ? ' face' : ' faces'));
 				if(numFaces>0){
 					if (apiResponse.responses[0].faceAnnotations) {
-						console.log(apiResponse.responses[0].faceAnnotations[0].joyLikelihood);
+						console.log(apiResponse.responses[0].faceAnnotations[0]);
 						var happy = convertEmotionInfoToNum(apiResponse.responses[0].faceAnnotations[0].joyLikelihood);
 						var sad = convertEmotionInfoToNum(apiResponse.responses[0].faceAnnotations[0].sorrowLikelihood);
 						var angry = convertEmotionInfoToNum(apiResponse.responses[0].faceAnnotations[0].angerLikelihood);
