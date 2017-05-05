@@ -36,6 +36,9 @@
 </head>
 
 <body>
+<table width="100%">
+<tr>
+<td width="60%">
 	<div id="wrapper"> 
 		<button class="js-button">BUTTON</button>
 		<button id="capture">START</button>
@@ -48,6 +51,15 @@
 	<canvas style="display:none;" width="640" height="480" id="snap"></canvas>
 	<svg id="svgchart"></svg>
 
+</td>
+<td width="40%" align="left">
+<div id="messageDiv" style="position:absolute;top:140px;left:720px;color:#ffffff;">
+<h3>Hey There, Welcome to Sparshik Vision Bot</h3>
+I am glad you are happy today, will you like me<br> to detect some of you face characteristics, <br>say yes or No by nodding
+</div>
+</td>
+</tr>
+</table>
 	<script type="text/javascript">
 	
 			firebase.initializeApp(config);
@@ -126,9 +138,112 @@
 			console.log(browserId);
 			var emotionsRef = ref.child(browserId);
 			console.log(emotionsRef);
+			var panQueue = [];
+			var rollQueue = [];
+			var tiltQueue = [];
+			var DepthOfCurrState = 0;
+			var getChocolate = false;
+			var eclairs = 0;
+			
 			emotionsRef.on("value",function(snapshot){
+				console.log('+++++++++++++++++++++++++');
 				console.log(snapshot.val());
+				//------------ Beginning capturing and storing pan, tilt and roll values
+				function sleepFor( sleepDuration ){
+				    var now = new Date().getTime();
+				    while(new Date().getTime() < now + sleepDuration){ /* do nothing */ } 
+				}
+				
+				var panAngle = snapshot.val().panAngle;
+				var rollAngle = snapshot.val().rollAngle;
+				var tiltAngle = snapshot.val().tiltAngle;
+					
+				panQueue.push(panAngle);
+				rollQueue.push(rollAngle);
+				tiltQueue.push(tiltAngle);
 
+				while(panQueue.length>=3){panQueue.shift();}
+				while(rollQueue.length>=3){rollQueue.shift();}
+				while(tiltQueue.length>=3){tiltQueue.shift();}
+
+				var panMax = Math.max.apply(null, panQueue);
+				var panMin = Math.min.apply(null, panQueue);
+				var panDiff = panMax - panMin;
+
+				var tiltMax = Math.max.apply(null, tiltQueue);
+				var tiltMin = Math.min.apply(null, tiltQueue);
+				var tiltDiff = tiltMax - tiltMin;
+
+				console.log(panMax);
+				console.log(panMin);
+				console.log(panDiff);
+				console.log('----------------------------');
+				console.log(tiltMax);
+				console.log(tiltMin);
+				console.log(tiltDiff);
+				
+			
+				if(DepthOfCurrState == 0){					
+					if(panDiff>10){
+						tiltQueue = [];
+						panQueue = [];
+						DepthOfCurrState++;
+						alert('neg');
+						getChocolate = true;
+					}
+			else if(tiltDiff>10){
+					tiltQueue = [];
+					panQueue = [];
+					DepthOfCurrState++;
+					alert('pos');
+					document.getElementById('messageDiv').innerHTML = "You dont have moustache and beard";
+					}
+				}
+			
+				if(DepthOfCurrState == 1){
+					document.getElementById('messageDiv').innerHTML = "Will you like some chocolates, reply by nodding?";
+					console.log(tiltDiff);
+					console.log(tiltDiff>10);
+					
+					if(tiltDiff>10){
+						DepthOfCurrState++;
+						tiltQueue = [];
+						panQueue = [];
+						tiltDiff=0;
+	 					alert('pos2');
+						document.getElementById('messageDiv').innerHTML = "Will you like Eclairs by Cadburys?";						
+					}
+				}
+				if(DepthOfCurrState == 2){
+					if(tiltDiff>10){
+						tiltQueue = [];
+						panQueue = [];
+	 					alert('pos3');
+						document.getElementById('messageDiv').innerHTML = "Please ask Navendu to give you one";
+						DepthOfCurrState++;
+					}else if(panDiff>10){
+						tiltQueue = [];
+						panQueue = [];
+						DepthOfCurrState++;
+						alert('neg3');
+						document.getElementById('messageDiv').innerHTML = "We also have one by Chikko, will you like that?";						
+					}
+				}
+
+// 				if(panDiff>10){
+// 					tiltQueue = [];
+// 					text = 'Dislike';
+// 					body = 'my coffee';
+// 					img  = 'images/thumbsdown.jpg';
+// 					notification(text, body, img);
+// 				}else if(tiltDiff>10){
+// 					panQueue = [];
+// 					text = 'Like';
+// 					body = 'my coffee';
+// 					img  = 'images/thumbsup.jpg';
+// 					notification(text, body, img);
+// 				}
+				//------------ Ended storing and capturing pan, tilt and roll values
 				if (snapshot.val().happiness === 0 ) {
 					status = Math.max(status - 40, 0);  
 				}else{
@@ -149,10 +264,14 @@
 			var timer;
 			$("#capture").click(function() {
 				timer = setInterval(snapshot, 1000);
+				console.log('----------- started here -------------');
 			});
 			$("#stop").click(function() {
 				clearInterval(timer);
 				localMediaStream.stop();
+				panQueue = [];
+				rollQueue = [];
+				tiltQueue = [];
 			});
 			$(function() {
 				notify.requestPermission()
@@ -166,19 +285,19 @@
 					text = 'Dark lord is here';
 					body = 'my my';
 					img  = 'images/fear.png';
-					notification(text, body, img);
+// 					notification(text, body, img);
 				}
 				if (status == 0) {
 					text = 'Who needs testing';
 					body = 'it is all zero';
 					img  = 'images/sad.png';
-					notification(text, body, img);
+// 					notification(text, body, img);
 				}
 				if (status == 120) {
 					text = 'I am so happy';
 					body = 'all positive';
 					img  = 'images/joy.png';
-					notification(text, body, img);
+// 					notification(text, body, img);
 				}
 			}
 			var notification = function(text, body, img){

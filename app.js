@@ -9,7 +9,7 @@ var fs = require('fs');
 var firebase = require('firebase-admin');
 firebase.initializeApp({
   credential: firebase.credential.cert(serviceAccount),
-  databaseURL: "https://monalisa-e921b.firebaseio.com"
+  databaseURL: "https://spvision-f2ef7.firebaseio.com"
 });
 var ref = firebase.database().ref('faces');
 // var userId = (Math.random() + 1).toString(36).substring(2, 12);
@@ -17,7 +17,7 @@ var ref = firebase.database().ref('faces');
 
 
 var gcloud = require('google-cloud')({
-	projectId: 'monalisa-e921b',
+	projectId: 'spvision-f2ef7',
 	keyFilename: 'firebase-privatekey.json'
 });
 
