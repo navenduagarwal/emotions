@@ -57,7 +57,7 @@ app.post('/submit', function(req, res){
 						console.log(browserId);
 						var emotionsRef = ref.child(browserId);
 
-						emotionsRef.set({happiness : happy, sadness: sad, anger: angry, surprise: surprise, rollAngle: rollAngle, panAngle: panAngle, tiltAngle: tiltAngle},function(data){
+						emotionsRef.set({happiness : happy, sadness: sad, anger: angry, surprise: surprise, rollAngle: rollAngle, panAngle: panAngle, tiltAngle: tiltAngle, numFaces: numFaces},function(data){
 							console.log("emotion identified for face 1");
 						});
 					}
