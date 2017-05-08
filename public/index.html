@@ -144,6 +144,16 @@
 			var DepthOfCurrState = 0;
 			var eclairs = 0;
 			var numFaces = 0;
+			var faceDetected = false;
+			var emotionDetected = false;
+			
+			ref.child(browserId).remove(function (error) {
+			    if (!error) {
+// 			        alert('removed');
+			    }else{
+// 			    	alert(error);
+			    }
+			});
 			
 			emotionsRef.on("value",function(snapshot){
 				console.log('+++++++++++++++++++++++++');
@@ -155,12 +165,16 @@
 				}
 				
 				numFaces = snapshot.val().numFaces;
-				if(numFaces>1){
-					document.getElementById('messageDiv').innerHTML = "<h3>Hey all lovely people, Welcome to Sparshik Vision Bot</h3><br> To test vision bot please come one by one";
-				}else if(numFaces==1){
-					document.getElementById('messageDiv').innerHTML = "<h3>Hey There, Welcome to Sparshik Vision Bot</h3>";
-				}else{
-					
+				if(!faceDetected){
+					if(numFaces>1){
+						document.getElementById('messageDiv').innerHTML = "<h3>Hey all lovely people, Welcome to Sparshik Vision Bot</h3><br> To test vision bot please come one by one";
+						faceDetected = true;
+					}else if(numFaces==1){
+						document.getElementById('messageDiv').innerHTML = "<h3>Hey There, Welcome to Sparshik Vision Bot</h3>";
+						faceDetected = true;
+					}else{
+						
+					}
 				}
 				
 				var panAngle = snapshot.val().panAngle;
@@ -171,16 +185,22 @@
 				var anger = snapshot.val().anger;
 				var sadness = snapshot.val().sadness;
 				var surprise = snapshot.val().sadness;
-				if(happiness>0){
-					document.getElementById('messageDiv').innerHTML = "I am glad you are happy today, will you like me<br> to detect some of you face characteristics, <br>say yes or No by nodding";
-				}else if(sadness>0){
-					document.getElementById('messageDiv').innerHTML = "I find your emotion as sad, To cheer you up <br>will you like me to detect some of you face characteristics, <br>say yes or No by nodding";
-				}else if(surprise>0){
-					document.getElementById('messageDiv').innerHTML = "I find your emotion as surprised, To cheer you up <br>will you like me to detect some of you face characteristics, <br>say yes or No by nodding";
-				}else if(anger>0){
-					document.getElementById('messageDiv').innerHTML = "I find your emotion as angry, To cheer you up <br>will you like me to detect some of you face characteristics, <br>say yes or No by nodding";
-				}
 				
+				if(!emotionDetected){
+					if(happiness>0){
+						document.getElementById('messageDiv').innerHTML = "I am glad you are happy today, will you like me<br> to detect some of you face characteristics, <br>say yes or No by nodding";
+						emotionDetected = true;
+					}else if(sadness>0){
+						document.getElementById('messageDiv').innerHTML = "I find your emotion as sad, To cheer you up <br>will you like me to detect some of you face characteristics, <br>say yes or No by nodding";
+						emotionDetected = true;
+					}else if(surprise>0){
+						document.getElementById('messageDiv').innerHTML = "I find your emotion as surprised, To cheer you up <br>will you like me to detect some of you face characteristics, <br>say yes or No by nodding";
+						emotionDetected = true;
+					}else if(anger>0){
+						document.getElementById('messageDiv').innerHTML = "I find your emotion as angry, To cheer you up <br>will you like me to detect some of you face characteristics, <br>say yes or No by nodding";
+						emotionDetected = true;
+					}
+				}
 				panQueue.push(panAngle);
 				rollQueue.push(rollAngle);
 				tiltQueue.push(tiltAngle);
@@ -211,16 +231,18 @@
 						tiltQueue = [];
 						panQueue = [];
 						DepthOfCurrState++;
+						tiltDiff=0;
 						panDiff=0;
 // 						alert('neg');
 					}
 			else if(tiltDiff>10){
 					tiltQueue = [];
-					panQueue = [];
-					DepthOfCurrState++;
+					panQueue = [];					
 					tiltDiff=0;
-// 					alert('pos');
+					panDiff=0;
 					document.getElementById('messageDiv').innerHTML = "You dont have moustache and beard";
+					sleepFor(1000);
+					DepthOfCurrState++;
 					}
 				}
 			
@@ -231,12 +253,14 @@
 						tiltQueue = [];
 						panQueue = [];
 						tiltDiff=0;
+						panDiff=0;
 // 	 					alert('pos2');
 						document.getElementById('messageDiv').innerHTML = "Will you like Eclairs by Cadburys?";						
 					}else if(panDiff>10){
 						DepthOfCurrState++;
 						tiltQueue = [];
 						panQueue = [];
+						tiltDiff=0;
 						panDiff=0;
 // 						alert('neg2');
 						document.getElementById('messageDiv').innerHTML = "Please give some feedback to Navendu/Ankita<br> before you leave. Thank you for your time";						
@@ -248,12 +272,14 @@
 						tiltQueue = [];
 						panQueue = [];
 						tiltDiff=0;
+						panDiff=0;
 // 	 					alert('pos3');
 						document.getElementById('messageDiv').innerHTML = "Please ask Navendu to give you one";						
 					}else if(panDiff>10){
 						DepthOfCurrState++;
 						tiltQueue = [];
 						panQueue = [];
+						tiltDiff=0;
 						panDiff=0;
 // 						alert('neg3');
 						document.getElementById('messageDiv').innerHTML = "We also have one by Chikko, will you like that?";						
@@ -265,12 +291,14 @@
 						tiltQueue = [];
 						panQueue = [];
 						tiltDiff=0;
+						panDiff=0;
 // 	 					alert('pos4');
 						document.getElementById('messageDiv').innerHTML = "Please ask Navendu to give you one";
 					}else if(panDiff>10){
 						DepthOfCurrState++;
 						tiltQueue = [];
 						panQueue = [];
+						tiltDiff=0;
 						panDiff=0;
 // 						alert('neg4');
 						document.getElementById('messageDiv').innerHTML = "We don’t have any other, please give <br> Navendu some feedback";						
