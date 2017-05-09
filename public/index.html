@@ -252,6 +252,7 @@
 						DepthOfCurrState++;
 						tiltDiff=0;
 						panDiff=0;
+						document.getElementById('messageDiv').innerHTML = "Will you like some chocolates, reply by nodding?";		
 // 						alert('neg');
 					}
 			else if(tiltDiff>15){
@@ -259,7 +260,7 @@
 					panQueue = [];					
 					tiltDiff=0;
 					panDiff=0;
-					document.getElementById('messageDiv').innerHTML = "You dont have moustache and beard";  // Code to be written by Navendu for face features detection
+					document.getElementById('messageDiv').innerHTML = "You dont have moustache and beard<br>Will you like some chocolates, reply by nodding?";  // Code to be written by Navendu for face features detection
 // 					alert('abc');
 // 					sleepFor(1000);
 					DepthOfCurrState++;
@@ -267,7 +268,7 @@
 				}
 			
 				if(DepthOfCurrState == 1){
-					document.getElementById('messageDiv').innerHTML = "Will you like some chocolates, reply by nodding?";				
+// 					document.getElementById('messageDiv').innerHTML = "Will you like some chocolates, reply by nodding?";				
 					if(tiltDiff>15){
 						DepthOfCurrState++;
 						tiltQueue = [];
