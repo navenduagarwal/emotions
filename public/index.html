@@ -4,14 +4,14 @@
 <head>
 	<script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script>
 	<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
-	<script src="/static/js/desktop-notify-min.js"></script>
-	<script src="/static/js/config.js"></script>
-	<link rel="manifest" href="/static/manifest.json">
+	<script src="/js/desktop-notify-min.js"></script>
+	<script src="/js/config.js"></script>
+	<link rel="manifest" href="/manifest.json">
 	<style>
 		body {
 			padding: 50px;
 			font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-/* 			background-image: url(/static/images/bg.jpg); */
+/* 			background-image: url(/images/bg.jpg); */
 			background-color: #160B5A;
 			background-size: cover;
 		}
@@ -33,7 +33,7 @@
 		}
 	</style>
 
-	<title>Soulgem Monitor</title>
+	<title>Emotions Monitor</title>
 </head>
 
 <body>
@@ -175,10 +175,10 @@
 		if(DepthOfCurrState == -2){		
 // 					alert(faceDetected);
 					if(numFaces>1){
-						document.getElementById('messageDiv').innerHTML = "<h1>Hey all lovely people, <br>Welcome to Sparshik Vision Bot<br> To test vision bot please come one by one</h1>";
+						document.getElementById('messageDiv').innerHTML = "<h1>Hey all lovely people, <br>Welcome to Sparshik Emotion Bot<br> To test vision bot please come one by one</h1>";
 // 						DepthOfCurrState++;
 					}else if(numFaces==1){
-						document.getElementById('messageDiv').innerHTML = "<h1>Hey There, <br>Welcome to Sparshik Vision Bot</h1>";
+						document.getElementById('messageDiv').innerHTML = "<h1>Hey There, <br>Welcome to Sparshik Emotion Bot</h1>";
 						DepthOfCurrState++;
 					}else{
 						
